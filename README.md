@@ -1,14 +1,33 @@
-# Configfacets JS Client
+# Configfacets - JS Client Library
 
-A simple JavaScript client for fetching and managing configuration data from Configfacets.
+## Overview
 
-## Installation
+As applications scale and integrate with multiple systems, managing configurations becomes increasingly complex. Configfacets simplifies this with a Low-Code/No-Code configuration management system using plain JSON—no custom verbs, no complicated syntax. This JS client library facilitates seamless interaction with the Configfacets API, enabling efficient retrieval and management of configuration data.
 
-```sh
-npm install configfacets
-```
+Our key features are...
+
+**Repositories & Versioning:**
+Design configurations as modular, reusable components, store them in a centralized repository, and maintain full version control for better organization and tracking.
+
+**Reusability:**
+Add provider and community-contributed repositories as dependencies, reuse configuration templates, pass in customizable values to effortlessly set up and manage your application configurations.
+
+**Collaboration:**
+Invite users and teams to repository with precise role-based permissions—Admin, Collaborator, or Viewer—to control access and streamline contributions.
+
+**REST APIs:**
+Expose configurations through REST API endpoints. Generate static and dynamic configurations by leveraging facet filters and runtime configuration values in the request context.
+
+**Organization Management:**
+Our hierarchical design simplifies managing multi-level organizational structures, team hierarchies, roles, and responsibilities.
 
 ## Usage
+
+### Installation
+
+```bash
+npm install configfacets
+```
 
 ```js
 import Configfacets from "configfacets";
@@ -27,3 +46,15 @@ import Configfacets from "configfacets";
   );
 })();
 ```
+
+## API Reference
+
+**Configuration**
+
+- `constructor(apiUrl, apiKey = null, postBody = {}):` Initializes the configuration object.
+- `async fetch():` Fetches the configuration data from the API.
+- `getValue(keyPath):` Retrieves the value for the specified key path.
+
+## Contributing
+
+We welcome contributions!, feel free to connect with us in our [Discord community](https://discord.gg/zWj3Rzud5s)

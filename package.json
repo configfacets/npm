@@ -1,0 +1,29 @@
+{
+  "name": "configfacets",
+  "version": "0.0.2",
+  "description": "Re-imagining configuration management",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/configfacets/npm.git"
+  },
+  "keywords": [
+    "templates",
+    "configuration",
+    "deployments",
+    "feature-flags",
+    "iac",
+    "prompts",
+    "prompts-template"
+  ],
+  "author": "nathangokul111@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/configfacets/npm/issues"
+  },
+  "homepage": "https://github.com/configfacets/npm#readme"
+}

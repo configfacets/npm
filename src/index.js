@@ -1,6 +1,7 @@
 class Configfacets {
-  constructor(apiUrl, apiKey = null, postBody = {}) {
-    this.apiUrl = apiUrl;
+  constructor(source, sourceType, apiKey = null, postBody = {}) {
+    this.source = source;
+    this.sourceType = sourceType;
     this.apiKey = apiKey;
     this.postBody = postBody;
     this.configData = null;
@@ -8,31 +9,40 @@ class Configfacets {
 
   async fetch() {
     try {
-      if (!this.apiUrl) {
-        throw new Error("Missing required API URL");
+      if (!this.source) {
+        throw new Error("Missing required source");
       }
 
-      // Set headers, add API key if present
-      const headers = { "Content-Type": "application/json" };
-      if (this.apiKey) {
-        headers["X-APIKEY"] = this.apiKey; // Add API key header
-      }
+      if (this.sourceType === "file") {
+        // Read from a local file
+        const fs = await import("fs/promises");
+        const data = await fs.readFile(this.source, "utf-8");
+        this.configData = JSON.parse(data);
+      } else if (this.sourceType === "url") {
+        // Fetch from a URL
+        const headers = { "Content-Type": "application/json" };
+        if (this.apiKey) {
+          headers["X-APIKEY"] = this.apiKey;
+        }
 
-      const response = await fetch(this.apiUrl, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(this.postBody),
-      });
+        const response = await fetch(this.source, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(this.postBody),
+        });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-      const contentType = response.headers.get("Content-Type");
-      if (contentType.includes("json")) {
-        this.configData = await response.json();
+        const contentType = response.headers.get("Content-Type");
+        if (contentType.includes("json")) {
+          this.configData = await response.json();
+        } else {
+          this.configData = await response.text();
+        }
       } else {
-        this.configData = await response.text();
+        throw new Error("Invalid sourceType. Use 'file' or 'url'.");
       }
     } catch (error) {
       console.error("Error fetching configuration:", error);

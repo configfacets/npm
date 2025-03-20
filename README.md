@@ -35,6 +35,7 @@ import Configfacets from "configfacets";
 (async () => {
   const config = new Configfacets(
     "https://configfacets.com/apis/repos/configfacets/core-concepts/appconfigs/resources/collections/feature-flags/exec?format=json",
+    "url",
     "<your_api_key>",
     { facets: ["env:prod", "country:CA"] }
   );
@@ -51,10 +52,10 @@ import Configfacets from "configfacets";
 
 **Configuration**
 
-- `constructor(apiUrl, apiKey = null, postBody = {}):` Initializes the configuration object.
-- `async fetch():` Fetches the configuration data from the API.
+- `constructor(source, sourceType, apiKey = null, postBody = {}):` Initializes the configuration object with a source (URL or file) and source type.
+- `async fetch():` Fetches the configuration data from the source.
 - `getValue(keyPath):` Retrieves the value for the specified key path.
 
 ## Contributing
 
-We welcome contributions!, feel free to connect with us in our [Discord community](https://discord.gg/zWj3Rzud5s)
+We welcome contributions! Feel free to connect with us in our [Discord community](https://discord.gg/zWj3Rzud5s).
